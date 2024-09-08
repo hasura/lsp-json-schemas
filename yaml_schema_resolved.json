@@ -155,7 +155,9 @@
               "description": "Prefix to use while generating GraphQL type names."
             },
             "namingConvention": {
-              "type": "string"
+              "type": "string",
+              "enum": ["none", "graphql"],
+              "description": "Naming convention to use while generating GraphQL fields and types."
             }
           },
           "required": ["rootPath"],
@@ -166,7 +168,8 @@
         "EnvMapping": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Subgraph/definitions/EnvSource"
+            "$ref": "#/definitions/Subgraph/definitions/EnvSource",
+            "description": "Target Environment variable."
           },
           "description": "Environment Variables mapping config.",
           "title": "EnvMapping"
@@ -175,7 +178,8 @@
           "type": "object",
           "properties": {
             "fromEnv": {
-              "type": "string"
+              "type": "string",
+              "description": "Source Environment variable."
             }
           },
           "required": ["fromEnv"],
@@ -187,10 +191,12 @@
           "type": "object",
           "properties": {
             "path": {
-              "type": "string"
+              "type": "string",
+              "description": "Path to connector config file."
             },
             "connectorLinkName": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of connector link associated with the connector."
             }
           },
           "required": ["path"],
@@ -264,7 +270,8 @@
         "EnvMapping": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Connector/definitions/EnvSource"
+            "$ref": "#/definitions/Connector/definitions/EnvSource",
+            "description": "Target Environment variable."
           },
           "description": "Environment Variables mapping config.",
           "title": "EnvMapping"
@@ -273,7 +280,8 @@
           "type": "object",
           "properties": {
             "fromEnv": {
-              "type": "string"
+              "type": "string",
+              "description": "Source Environment variable."
             }
           },
           "required": ["fromEnv"],
@@ -307,26 +315,35 @@
     },
     "ContextYaml": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "type": "object",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "const": "Context"
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ContextYaml/definitions/ProjectContextV2"
         },
-        "version": {
-          "type": "string",
-          "const": "v2"
-        },
-        "definition": {
-          "$ref": "#/definitions/ContextYaml/definitions/ContextV2Definition",
-          "description": "Context Definition."
+        {
+          "$ref": "#/definitions/ContextYaml/definitions/ProjectContextV3"
         }
-      },
-      "required": ["kind", "version", "definition"],
-      "additionalProperties": false,
+      ],
       "description": "DDN project Context.",
       "title": "ProjectContext",
       "definitions": {
+        "ProjectContextV2": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "Context"
+            },
+            "version": {
+              "type": "string",
+              "const": "v2"
+            },
+            "definition": {
+              "$ref": "#/definitions/ContextYaml/definitions/ContextV2Definition"
+            }
+          },
+          "required": ["kind", "version", "definition"],
+          "additionalProperties": false
+        },
         "ContextV2Definition": {
           "type": "object",
           "properties": {
@@ -378,6 +395,67 @@
           "additionalProperties": false,
           "description": "Context Configuration.",
           "title": "ContextV2Config"
+        },
+        "ProjectContextV3": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "Context"
+            },
+            "version": {
+              "type": "string",
+              "const": "v3"
+            },
+            "definition": {
+              "$ref": "#/definitions/ContextYaml/definitions/ContextV3Definition"
+            }
+          },
+          "required": ["kind", "version", "definition"],
+          "additionalProperties": false
+        },
+        "ContextV3Definition": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scripts": {
+              "$ref": "#/definitions/ContextYaml/definitions/Scripts",
+              "description": "Configured scripts."
+            },
+            "current": {
+              "type": "string",
+              "description": "Current Active Context."
+            },
+            "contexts": {
+              "$ref": "#/definitions/ContextYaml/definitions/Contexts",
+              "description": "Configured contexts."
+            }
+          },
+          "description": "Context V3 Definition.",
+          "title": "ContextV3Definition"
+        },
+        "Scripts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContextYaml/definitions/ScriptConfig"
+          },
+          "description": "Configured scripts.",
+          "title": "Scripts"
+        },
+        "ScriptConfig": {
+          "type": "object",
+          "properties": {
+            "bash": {
+              "type": "string"
+            },
+            "powershell": {
+              "type": "string"
+            }
+          },
+          "required": ["bash", "powershell"],
+          "additionalProperties": false,
+          "description": "Script Config.",
+          "title": "ScriptConfig"
         }
       }
     }
