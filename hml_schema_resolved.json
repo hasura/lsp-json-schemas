@@ -48,6 +48,8 @@
                   "description": "Definition of the authentication configuration used by the API server.",
                   "oneOf": [
                     {
+                      "title": "AuthConfigV1",
+                      "description": "Definition of the authentication configuration v1, used by the API server.",
                       "type": "object",
                       "required": ["definition", "kind", "version"],
                       "properties": {
@@ -62,7 +64,7 @@
                         "definition": {
                           "$id": "https://hasura.io/jsonschemas/metadata/AuthConfigV1",
                           "title": "AuthConfigV1",
-                          "description": "Definition of the authentication configuration used by the API server.",
+                          "description": "Definition of the authentication configuration v1, used by the API server.",
                           "type": "object",
                           "required": ["mode"],
                           "properties": {
@@ -155,7 +157,11 @@
                                         }
                                       ],
                                       "type": "object",
-                                      "required": ["claimsConfig", "key", "tokenLocation"],
+                                      "required": [
+                                        "claimsConfig",
+                                        "key",
+                                        "tokenLocation"
+                                      ],
                                       "properties": {
                                         "audience": {
                                           "description": "Optional validation to check that the `aud` field is a member of the `audience` received, otherwise will throw error.",
@@ -192,7 +198,10 @@
                                                       "title": "JWTClaimsMap",
                                                       "description": "Can be used when Hasura claims are not all present in the single object, but individual claims are provided a JSON pointer within the decoded JWT and optionally a default value.",
                                                       "type": "object",
-                                                      "required": ["x-hasura-allowed-roles", "x-hasura-default-role"],
+                                                      "required": [
+                                                        "x-hasura-allowed-roles",
+                                                        "x-hasura-default-role"
+                                                      ],
                                                       "properties": {
                                                         "x-hasura-default-role": {
                                                           "description": "JSON pointer to lookup the default role within the decoded JWT.",
@@ -204,7 +213,9 @@
                                                                 {
                                                                   "description": "Literal value of the claims mapping",
                                                                   "type": "object",
-                                                                  "required": ["literal"],
+                                                                  "required": [
+                                                                    "literal"
+                                                                  ],
                                                                   "properties": {
                                                                     "literal": {
                                                                       "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/0/oneOf/1/oneOf/0/properties/definition/properties/allowRoleEmulationBy/anyOf/0"
@@ -215,13 +226,18 @@
                                                                 {
                                                                   "description": "Look up the Hasura claims at the specified JSON Pointer and provide a default value if the lookup fails.",
                                                                   "type": "object",
-                                                                  "required": ["path"],
+                                                                  "required": [
+                                                                    "path"
+                                                                  ],
                                                                   "properties": {
                                                                     "path": {
                                                                       "$id": "https://hasura.io/jsonschemas/metadata/JWTClaimsMappingPathEntry_for_Role",
                                                                       "title": "JWTClaimsMappingPathEntry",
+                                                                      "description": "Entry to lookup the Hasura claims at the specified JSON Pointer",
                                                                       "type": "object",
-                                                                      "required": ["path"],
+                                                                      "required": [
+                                                                        "path"
+                                                                      ],
                                                                       "properties": {
                                                                         "path": {
                                                                           "description": "JSON pointer to find the particular claim in the decoded JWT token.",
@@ -259,7 +275,9 @@
                                                                 {
                                                                   "description": "Literal value of the claims mapping",
                                                                   "type": "object",
-                                                                  "required": ["literal"],
+                                                                  "required": [
+                                                                    "literal"
+                                                                  ],
                                                                   "properties": {
                                                                     "literal": {
                                                                       "type": "array",
@@ -273,13 +291,18 @@
                                                                 {
                                                                   "description": "Look up the Hasura claims at the specified JSON Pointer and provide a default value if the lookup fails.",
                                                                   "type": "object",
-                                                                  "required": ["path"],
+                                                                  "required": [
+                                                                    "path"
+                                                                  ],
                                                                   "properties": {
                                                                     "path": {
                                                                       "$id": "https://hasura.io/jsonschemas/metadata/JWTClaimsMappingPathEntry_for_Array_of_Role",
                                                                       "title": "JWTClaimsMappingPathEntry",
+                                                                      "description": "Entry to lookup the Hasura claims at the specified JSON Pointer",
                                                                       "type": "object",
-                                                                      "required": ["path"],
+                                                                      "required": [
+                                                                        "path"
+                                                                      ],
                                                                       "properties": {
                                                                         "path": {
                                                                           "description": "JSON pointer to find the particular claim in the decoded JWT token.",
@@ -288,7 +311,10 @@
                                                                         },
                                                                         "default": {
                                                                           "description": "Default value to be used when no value is found when looking up the value using the `path`.",
-                                                                          "type": ["array", "null"],
+                                                                          "type": [
+                                                                            "array",
+                                                                            "null"
+                                                                          ],
                                                                           "items": {
                                                                             "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/0/oneOf/1/oneOf/0/properties/definition/properties/allowRoleEmulationBy/anyOf/0"
                                                                           }
@@ -317,7 +343,10 @@
                                                       "title": "JWTClaimsNamespace",
                                                       "description": "Used when all of the Hasura claims are present in a single object within the decoded JWT.",
                                                       "type": "object",
-                                                      "required": ["claimsFormat", "location"],
+                                                      "required": [
+                                                        "claimsFormat",
+                                                        "location"
+                                                      ],
                                                       "properties": {
                                                         "claimsFormat": {
                                                           "description": "Format in which the Hasura claims will be present.",
@@ -329,12 +358,16 @@
                                                                 {
                                                                   "description": "Claims will be in the JSON format.",
                                                                   "type": "string",
-                                                                  "enum": ["Json"]
+                                                                  "enum": [
+                                                                    "Json"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "Claims will be in the Stringified JSON format.",
                                                                   "type": "string",
-                                                                  "enum": ["StringifiedJson"]
+                                                                  "enum": [
+                                                                    "StringifiedJson"
+                                                                  ]
                                                                 }
                                                               ]
                                                             }
@@ -371,7 +404,9 @@
                                                   "properties": {
                                                     "type": {
                                                       "type": "string",
-                                                      "enum": ["BearerAuthorization"]
+                                                      "enum": [
+                                                        "BearerAuthorization"
+                                                      ]
                                                     }
                                                   },
                                                   "additionalProperties": false
@@ -430,7 +465,10 @@
                                                       "title": "JWTKeyConfig",
                                                       "description": "JWT Secret config according to which the incoming JWT will be decoded.",
                                                       "type": "object",
-                                                      "required": ["algorithm", "key"],
+                                                      "required": [
+                                                        "algorithm",
+                                                        "key"
+                                                      ],
                                                       "properties": {
                                                         "algorithm": {
                                                           "description": "The algorithm used to decode the JWT.",
@@ -443,62 +481,86 @@
                                                                 {
                                                                   "description": "HMAC using SHA-256",
                                                                   "type": "string",
-                                                                  "enum": ["HS256"]
+                                                                  "enum": [
+                                                                    "HS256"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "HMAC using SHA-384",
                                                                   "type": "string",
-                                                                  "enum": ["HS384"]
+                                                                  "enum": [
+                                                                    "HS384"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "HMAC using SHA-512",
                                                                   "type": "string",
-                                                                  "enum": ["HS512"]
+                                                                  "enum": [
+                                                                    "HS512"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "ECDSA using SHA-256",
                                                                   "type": "string",
-                                                                  "enum": ["ES256"]
+                                                                  "enum": [
+                                                                    "ES256"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "ECDSA using SHA-384",
                                                                   "type": "string",
-                                                                  "enum": ["ES384"]
+                                                                  "enum": [
+                                                                    "ES384"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "RSASSA-PKCS1-v1_5 using SHA-256",
                                                                   "type": "string",
-                                                                  "enum": ["RS256"]
+                                                                  "enum": [
+                                                                    "RS256"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "RSASSA-PKCS1-v1_5 using SHA-384",
                                                                   "type": "string",
-                                                                  "enum": ["RS384"]
+                                                                  "enum": [
+                                                                    "RS384"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "RSASSA-PKCS1-v1_5 using SHA-512",
                                                                   "type": "string",
-                                                                  "enum": ["RS512"]
+                                                                  "enum": [
+                                                                    "RS512"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "RSASSA-PSS using SHA-256",
                                                                   "type": "string",
-                                                                  "enum": ["PS256"]
+                                                                  "enum": [
+                                                                    "PS256"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "RSASSA-PSS using SHA-384",
                                                                   "type": "string",
-                                                                  "enum": ["PS384"]
+                                                                  "enum": [
+                                                                    "PS384"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "RSASSA-PSS using SHA-512",
                                                                   "type": "string",
-                                                                  "enum": ["PS512"]
+                                                                  "enum": [
+                                                                    "PS512"
+                                                                  ]
                                                                 },
                                                                 {
                                                                   "description": "Edwards-curve Digital Signature Algorithm (EdDSA)",
                                                                   "type": "string",
-                                                                  "enum": ["EdDSA"]
+                                                                  "enum": [
+                                                                    "EdDSA"
+                                                                  ]
                                                                 }
                                                               ]
                                                             }
@@ -508,7 +570,7 @@
                                                           "description": "The key to use for decoding the JWT.",
                                                           "allOf": [
                                                             {
-                                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/0/oneOf/0/properties/definition/properties/headers/allOf/0/additionalProperties"
+                                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/14/oneOf/0/properties/definition/oneOf/0/properties/url/allOf/0"
                                                             }
                                                           ]
                                                         }
@@ -591,6 +653,8 @@
                       "additionalProperties": false
                     },
                     {
+                      "title": "AuthConfigV2",
+                      "description": "Definition of the authentication configuration v2, used by the API server.",
                       "type": "object",
                       "required": ["definition", "kind", "version"],
                       "properties": {
@@ -605,7 +669,7 @@
                         "definition": {
                           "$id": "https://hasura.io/jsonschemas/metadata/AuthConfigV2",
                           "title": "AuthConfigV2",
-                          "description": "Definition of the authentication configuration used by the API server.",
+                          "description": "Definition of the authentication configuration v2, used by the API server.",
                           "type": "object",
                           "required": ["mode"],
                           "properties": {
@@ -703,13 +767,14 @@
                                 {
                                   "$id": "https://hasura.io/jsonschemas/metadata/DataConnectorUrlV1",
                                   "title": "DataConnectorUrlV1",
+                                  "description": "A URL to access a data connector. This can be a single URL or a pair of read and write URLs.",
                                   "oneOf": [
                                     {
                                       "type": "object",
                                       "required": ["singleUrl"],
                                       "properties": {
                                         "singleUrl": {
-                                          "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/0/oneOf/0/properties/definition/properties/headers/allOf/0/additionalProperties"
+                                          "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/14/oneOf/0/properties/definition/oneOf/0/properties/url/allOf/0"
                                         }
                                       },
                                       "additionalProperties": false
@@ -721,14 +786,15 @@
                                         "readWriteUrls": {
                                           "$id": "https://hasura.io/jsonschemas/metadata/ReadWriteUrls",
                                           "title": "ReadWriteUrls",
+                                          "description": "A pair of URLs to access a data connector, one for reading and one for writing.",
                                           "type": "object",
                                           "required": ["read", "write"],
                                           "properties": {
                                             "read": {
-                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/0/oneOf/0/properties/definition/properties/headers/allOf/0/additionalProperties"
+                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/14/oneOf/0/properties/definition/oneOf/0/properties/url/allOf/0"
                                             },
                                             "write": {
-                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/0/oneOf/0/properties/definition/properties/headers/allOf/0/additionalProperties"
+                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/14/oneOf/0/properties/definition/oneOf/0/properties/url/allOf/0"
                                             }
                                           },
                                           "additionalProperties": false
@@ -750,31 +816,7 @@
                                   "description": "Key value map of HTTP headers to be sent with an HTTP request. The key is the header name and the value is a potential reference to an environment variable.",
                                   "type": "object",
                                   "additionalProperties": {
-                                    "$id": "https://hasura.io/jsonschemas/EnvironmentValue",
-                                    "title": "EnvironmentValue",
-                                    "description": "Either a literal string or a reference to a Hasura secret",
-                                    "oneOf": [
-                                      {
-                                        "type": "object",
-                                        "required": ["value"],
-                                        "properties": {
-                                          "value": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "additionalProperties": false
-                                      },
-                                      {
-                                        "type": "object",
-                                        "required": ["valueFromEnv"],
-                                        "properties": {
-                                          "valueFromEnv": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "additionalProperties": false
-                                      }
-                                    ]
+                                    "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/14/oneOf/0/properties/definition/oneOf/0/properties/url/allOf/0"
                                   }
                                 }
                               ]
@@ -785,11 +827,17 @@
                                 {
                                   "$id": "https://hasura.io/jsonschemas/metadata/VersionedSchemaAndCapabilities",
                                   "title": "VersionedSchemaAndCapabilities",
+                                  "description": "Versioned schema and capabilities for a data connector.",
                                   "oneOf": [
                                     {
                                       "title": "SchemaAndCapabilitiesV01",
+                                      "description": "Version 0.1 of schema and capabilities for a data connector.",
                                       "type": "object",
-                                      "required": ["capabilities", "schema", "version"],
+                                      "required": [
+                                        "capabilities",
+                                        "schema",
+                                        "version"
+                                      ],
                                       "properties": {
                                         "version": {
                                           "type": "string",
@@ -799,7 +847,13 @@
                                           "$schema": "http://json-schema.org/draft-07/schema#",
                                           "title": "Schema Response",
                                           "type": "object",
-                                          "required": ["collections", "functions", "object_types", "procedures", "scalar_types"],
+                                          "required": [
+                                            "collections",
+                                            "functions",
+                                            "object_types",
+                                            "procedures",
+                                            "scalar_types"
+                                          ],
                                           "properties": {
                                             "scalar_types": {
                                               "description": "A list of scalar types which will be used as the types of collection columns",
@@ -842,7 +896,10 @@
                                               "title": "Scalar Type",
                                               "description": "The definition of a scalar type, i.e. types that can be used as the types of columns.",
                                               "type": "object",
-                                              "required": ["aggregate_functions", "comparison_operators"],
+                                              "required": [
+                                                "aggregate_functions",
+                                                "comparison_operators"
+                                              ],
                                               "properties": {
                                                 "representation": {
                                                   "description": "A description of valid values for this scalar type. Defaults to `TypeRepresentation::JSON` if omitted",
@@ -1100,7 +1157,10 @@
                                                 {
                                                   "description": "One of the specified string values",
                                                   "type": "object",
-                                                  "required": ["one_of", "type"],
+                                                  "required": [
+                                                    "one_of",
+                                                    "type"
+                                                  ],
                                                   "properties": {
                                                     "type": {
                                                       "type": "string",
@@ -1154,7 +1214,10 @@
                                                 {
                                                   "description": "A nullable type",
                                                   "type": "object",
-                                                  "required": ["type", "underlying_type"],
+                                                  "required": [
+                                                    "type",
+                                                    "underlying_type"
+                                                  ],
                                                   "properties": {
                                                     "type": {
                                                       "type": "string",
@@ -1173,7 +1236,10 @@
                                                 {
                                                   "description": "An array type",
                                                   "type": "object",
-                                                  "required": ["element_type", "type"],
+                                                  "required": [
+                                                    "element_type",
+                                                    "type"
+                                                  ],
                                                   "properties": {
                                                     "type": {
                                                       "type": "string",
@@ -1192,7 +1258,10 @@
                                                 {
                                                   "description": "A predicate type for a given object type",
                                                   "type": "object",
-                                                  "required": ["object_type_name", "type"],
+                                                  "required": [
+                                                    "object_type_name",
+                                                    "type"
+                                                  ],
                                                   "properties": {
                                                     "type": {
                                                       "type": "string",
@@ -1232,7 +1301,10 @@
                                                 },
                                                 {
                                                   "type": "object",
-                                                  "required": ["argument_type", "type"],
+                                                  "required": [
+                                                    "argument_type",
+                                                    "type"
+                                                  ],
                                                   "properties": {
                                                     "type": {
                                                       "type": "string",
@@ -1318,7 +1390,13 @@
                                             "CollectionInfo": {
                                               "title": "Collection Info",
                                               "type": "object",
-                                              "required": ["arguments", "foreign_keys", "name", "type", "uniqueness_constraints"],
+                                              "required": [
+                                                "arguments",
+                                                "foreign_keys",
+                                                "name",
+                                                "type",
+                                                "uniqueness_constraints"
+                                              ],
                                               "properties": {
                                                 "name": {
                                                   "description": "The name of the collection\n\nNote: these names are abstract - there is no requirement that this name correspond to the name of an actual collection in the database.",
@@ -1372,7 +1450,10 @@
                                             "ForeignKeyConstraint": {
                                               "title": "Foreign Key Constraint",
                                               "type": "object",
-                                              "required": ["column_mapping", "foreign_collection"],
+                                              "required": [
+                                                "column_mapping",
+                                                "foreign_collection"
+                                              ],
                                               "properties": {
                                                 "column_mapping": {
                                                   "description": "The columns on which you want want to define the foreign key.",
@@ -1390,7 +1471,11 @@
                                             "FunctionInfo": {
                                               "title": "Function Info",
                                               "type": "object",
-                                              "required": ["arguments", "name", "result_type"],
+                                              "required": [
+                                                "arguments",
+                                                "name",
+                                                "result_type"
+                                              ],
                                               "properties": {
                                                 "name": {
                                                   "description": "The name of the function",
@@ -1420,7 +1505,11 @@
                                             "ProcedureInfo": {
                                               "title": "Procedure Info",
                                               "type": "object",
-                                              "required": ["arguments", "name", "result_type"],
+                                              "required": [
+                                                "arguments",
+                                                "name",
+                                                "result_type"
+                                              ],
                                               "properties": {
                                                 "name": {
                                                   "description": "The name of the procedure",
@@ -1453,7 +1542,10 @@
                                           "$schema": "http://json-schema.org/draft-07/schema#",
                                           "title": "Capabilities Response",
                                           "type": "object",
-                                          "required": ["capabilities", "version"],
+                                          "required": [
+                                            "capabilities",
+                                            "version"
+                                          ],
                                           "properties": {
                                             "version": {
                                               "type": "string"
@@ -1655,11 +1747,15 @@
                                 "required": ["argument", "value"],
                                 "properties": {
                                   "argument": {
-                                    "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/8/oneOf/0/properties/definition/properties/arguments/items/properties/name"
+                                    "$id": "https://hasura.io/jsonschemas/metadata/DataConnectorArgumentName",
+                                    "title": "DataConnectorArgumentName",
+                                    "description": "The name of an argument as defined by a data connector.",
+                                    "type": "string"
                                   },
                                   "value": {
                                     "$id": "https://hasura.io/jsonschemas/metadata/DataConnectorArgumentPresetValue",
                                     "title": "DataConnectorArgumentPresetValue",
+                                    "description": "The value of a data connector argument preset.",
                                     "type": "object",
                                     "required": ["httpHeaders"],
                                     "properties": {
@@ -1671,7 +1767,10 @@
                                             "title": "HttpHeadersPreset",
                                             "description": "Configuration of what HTTP request headers should be forwarded to a data connector.",
                                             "type": "object",
-                                            "required": ["additional", "forward"],
+                                            "required": [
+                                              "additional",
+                                              "forward"
+                                            ],
                                             "properties": {
                                               "forward": {
                                                 "description": "List of HTTP headers that should be forwarded from HTTP requests",
@@ -1686,6 +1785,7 @@
                                                   {
                                                     "$id": "https://hasura.io/jsonschemas/metadata/AdditionalHttpHeaders",
                                                     "title": "AdditionalHttpHeaders",
+                                                    "description": "Key value map of HTTP headers to be forwarded in the headers argument of a data connector request.",
                                                     "type": "object",
                                                     "additionalProperties": {
                                                       "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/10/oneOf/0/properties/definition/properties/mapping/items/properties/source/allOf/0/oneOf/0/properties/value"
@@ -1713,7 +1813,11 @@
                                   "title": "ResponseHeaders",
                                   "description": "Configuration of what HTTP response headers should be forwarded from a data connector to the client in HTTP response.",
                                   "type": "object",
-                                  "required": ["forwardHeaders", "headersField", "resultField"],
+                                  "required": [
+                                    "forwardHeaders",
+                                    "headersField",
+                                    "resultField"
+                                  ],
                                   "properties": {
                                     "headersField": {
                                       "description": "Name of the field in the NDC function/procedure's result which contains the response headers",
@@ -1885,7 +1989,10 @@
                                       "title": "FilterInputGraphqlConfig",
                                       "description": "Configuration for the filter operation.",
                                       "type": "object",
-                                      "required": ["fieldName", "operatorNames"],
+                                      "required": [
+                                        "fieldName",
+                                        "operatorNames"
+                                      ],
                                       "properties": {
                                         "fieldName": {
                                           "description": "The name of the filter operation field. Usually `where`.",
@@ -1903,7 +2010,12 @@
                                               "title": "FilterInputOperatorNames",
                                               "description": "The names of built-in filter operators.",
                                               "type": "object",
-                                              "required": ["and", "isNull", "not", "or"],
+                                              "required": [
+                                                "and",
+                                                "isNull",
+                                                "not",
+                                                "or"
+                                              ],
                                               "properties": {
                                                 "and": {
                                                   "description": "The name of the `and` operator. Usually `_and`.",
@@ -1958,7 +2070,11 @@
                                       "title": "OrderByInputGraphqlConfig",
                                       "description": "Configuration for the sort operation.",
                                       "type": "object",
-                                      "required": ["enumDirectionValues", "enumTypeNames", "fieldName"],
+                                      "required": [
+                                        "enumDirectionValues",
+                                        "enumTypeNames",
+                                        "fieldName"
+                                      ],
                                       "properties": {
                                         "fieldName": {
                                           "description": "The name of the filter operation field. Usually `order_by`.",
@@ -2004,8 +2120,12 @@
                                           "items": {
                                             "$id": "https://hasura.io/jsonschemas/metadata/OrderByEnumTypeName",
                                             "title": "OrderByEnumTypeName",
+                                            "description": "Type name for a sort directions enum, with the given set of possible directions.",
                                             "type": "object",
-                                            "required": ["directions", "typeName"],
+                                            "required": [
+                                              "directions",
+                                              "typeName"
+                                            ],
                                             "properties": {
                                               "directions": {
                                                 "type": "array",
@@ -2048,8 +2168,13 @@
                                     {
                                       "$id": "https://hasura.io/jsonschemas/metadata/AggregateGraphqlConfig",
                                       "title": "AggregateGraphqlConfig",
+                                      "description": "Configuration for the GraphQL schema for aggregates.",
                                       "type": "object",
-                                      "required": ["countDistinctFieldName", "countFieldName", "filterInputFieldName"],
+                                      "required": [
+                                        "countDistinctFieldName",
+                                        "countFieldName",
+                                        "filterInputFieldName"
+                                      ],
                                       "properties": {
                                         "filterInputFieldName": {
                                           "description": "The name of the filter input parameter of aggregate fields and field name in predicates",
@@ -2287,6 +2412,7 @@
                                     "items": {
                                       "$id": "https://hasura.io/jsonschemas/metadata/FieldArgumentDefinition",
                                       "title": "FieldArgumentDefinition",
+                                      "description": "The definition of an argument for a field in a user-defined object type.",
                                       "type": "object",
                                       "required": ["argumentType", "name"],
                                       "properties": {
@@ -2355,6 +2481,7 @@
                                         {
                                           "$id": "https://hasura.io/jsonschemas/metadata/ObjectApolloFederationConfig",
                                           "title": "ObjectApolloFederationConfig",
+                                          "description": "Configuration for apollo federation related types and directives.",
                                           "type": "object",
                                           "required": ["keys"],
                                           "properties": {
@@ -2363,6 +2490,7 @@
                                               "items": {
                                                 "$id": "https://hasura.io/jsonschemas/metadata/ApolloFederationObjectKey",
                                                 "title": "ApolloFederationObjectKey",
+                                                "description": "The definition of a key for an apollo federation object.",
                                                 "type": "object",
                                                 "required": ["fields"],
                                                 "properties": {
@@ -2405,7 +2533,10 @@
                                 "title": "DataConnectorTypeMapping",
                                 "description": "This defines the mapping of the fields of an object type to the corresponding columns of an object type in a data connector.",
                                 "type": "object",
-                                "required": ["dataConnectorName", "dataConnectorObjectType"],
+                                "required": [
+                                  "dataConnectorName",
+                                  "dataConnectorObjectType"
+                                ],
                                 "properties": {
                                   "dataConnectorName": {
                                     "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/0/oneOf/0/properties/definition/properties/name/allOf/0"
@@ -2617,7 +2748,13 @@
                           "title": "ObjectBooleanExpressionTypeV1",
                           "description": "Definition of a type representing a boolean expression on an Open DD object type. Deprecated in favour of `BooleanExpressionType`.",
                           "type": "object",
-                          "required": ["comparableFields", "dataConnectorName", "dataConnectorObjectType", "name", "objectType"],
+                          "required": [
+                            "comparableFields",
+                            "dataConnectorName",
+                            "dataConnectorObjectType",
+                            "name",
+                            "objectType"
+                          ],
                           "properties": {
                             "name": {
                               "description": "The name to give this object boolean expression type, used to refer to it elsewhere in the metadata. Must be unique across all types defined in this subgraph.",
@@ -2660,6 +2797,7 @@
                               "items": {
                                 "$id": "https://hasura.io/jsonschemas/metadata/ComparableField",
                                 "title": "ComparableField",
+                                "description": "A field of an object type that can be used for comparison when evaluating a boolean expression.",
                                 "type": "object",
                                 "required": ["fieldName", "operators"],
                                 "properties": {
@@ -2669,6 +2807,7 @@
                                   "operators": {
                                     "$id": "https://hasura.io/jsonschemas/metadata/EnableAllOrSpecific_for_OperatorName",
                                     "title": "EnableAllOrSpecific",
+                                    "description": "Enable all or specific values.",
                                     "oneOf": [
                                       {
                                         "type": "object",
@@ -2801,7 +2940,12 @@
                           "title": "BooleanExpressionTypeV1",
                           "description": "Definition of a type representing a boolean expression on an OpenDD object type.",
                           "type": "object",
-                          "required": ["isNull", "logicalOperators", "name", "operand"],
+                          "required": [
+                            "isNull",
+                            "logicalOperators",
+                            "name",
+                            "operand"
+                          ],
                           "properties": {
                             "name": {
                               "description": "The name to give this boolean expression type, used to refer to it elsewhere in the metadata. Must be unique across all types defined in this subgraph.",
@@ -2830,7 +2974,11 @@
                                           "title": "BooleanExpressionObjectOperand",
                                           "description": "Definition of an object type representing a boolean expression on an OpenDD object type.",
                                           "type": "object",
-                                          "required": ["comparableFields", "comparableRelationships", "type"],
+                                          "required": [
+                                            "comparableFields",
+                                            "comparableRelationships",
+                                            "type"
+                                          ],
                                           "properties": {
                                             "type": {
                                               "description": "The name of the object type that this boolean expression applies to.",
@@ -2846,8 +2994,12 @@
                                               "items": {
                                                 "$id": "https://hasura.io/jsonschemas/metadata/BooleanExpressionComparableField",
                                                 "title": "BooleanExpressionComparableField",
+                                                "description": "Comparison configuration definition for a field that can be used for a comparison",
                                                 "type": "object",
-                                                "required": ["booleanExpressionType", "fieldName"],
+                                                "required": [
+                                                  "booleanExpressionType",
+                                                  "fieldName"
+                                                ],
                                                 "properties": {
                                                   "fieldName": {
                                                     "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/2/oneOf/0/properties/definition/properties/globalIdFields/items"
@@ -2867,7 +3019,9 @@
                                                 "title": "BooleanExpressionComparableRelationship",
                                                 "description": "Definition of a relationship that can be used for a comparison",
                                                 "type": "object",
-                                                "required": ["relationshipName"],
+                                                "required": [
+                                                  "relationshipName"
+                                                ],
                                                 "properties": {
                                                   "relationshipName": {
                                                     "description": "The name of the relationship to use for comparison",
@@ -2909,7 +3063,11 @@
                                           "title": "BooleanExpressionScalarOperand",
                                           "description": "Definition of a scalar type representing a boolean expression on an OpenDD object type.",
                                           "type": "object",
-                                          "required": ["comparisonOperators", "dataConnectorOperatorMapping", "type"],
+                                          "required": [
+                                            "comparisonOperators",
+                                            "dataConnectorOperatorMapping",
+                                            "type"
+                                          ],
                                           "properties": {
                                             "type": {
                                               "description": "The OpenDD type name of the scalar type that this boolean expression applies to.",
@@ -2925,8 +3083,12 @@
                                               "items": {
                                                 "$id": "https://hasura.io/jsonschemas/metadata/ComparisonOperator",
                                                 "title": "ComparisonOperator",
+                                                "description": "Definition of a comparison operator for a scalar type",
                                                 "type": "object",
-                                                "required": ["argumentType", "name"],
+                                                "required": [
+                                                  "argumentType",
+                                                  "name"
+                                                ],
                                                 "properties": {
                                                   "name": {
                                                     "description": "Name you want to give the operator in OpenDD / GraphQL",
@@ -2954,8 +3116,13 @@
                                               "items": {
                                                 "$id": "https://hasura.io/jsonschemas/metadata/DataConnectorOperatorMapping",
                                                 "title": "DataConnectorOperatorMapping",
+                                                "description": "Mapping between OpenDD operator names and the names used in the data connector schema",
                                                 "type": "object",
-                                                "required": ["dataConnectorName", "dataConnectorScalarType", "operatorMapping"],
+                                                "required": [
+                                                  "dataConnectorName",
+                                                  "dataConnectorScalarType",
+                                                  "operatorMapping"
+                                                ],
                                                 "properties": {
                                                   "dataConnectorName": {
                                                     "description": "Name of the data connector this mapping applies to",
@@ -3100,7 +3267,11 @@
                             }
                           ],
                           "type": "object",
-                          "required": ["dataConnectorName", "dataConnectorScalarType", "representation"],
+                          "required": [
+                            "dataConnectorName",
+                            "dataConnectorScalarType",
+                            "representation"
+                          ],
                           "properties": {
                             "dataConnectorName": {
                               "description": "The name of the data connector that this scalar type comes from.",
@@ -3133,7 +3304,13 @@
                                       "title": "InbuiltType",
                                       "description": "An inbuilt primitive OpenDD type.",
                                       "type": "string",
-                                      "enum": ["ID", "Int", "Float", "Boolean", "String"]
+                                      "enum": [
+                                        "ID",
+                                        "Int",
+                                        "Float",
+                                        "Boolean",
+                                        "String"
+                                      ]
                                     },
                                     {
                                       "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/2/oneOf/0/properties/definition/properties/name/allOf/0"
@@ -3180,6 +3357,7 @@
                 {
                   "$id": "https://hasura.io/jsonschemas/metadata/AggregateExpression",
                   "title": "AggregateExpression",
+                  "description": "Definition of an aggregate expression on an OpenDD type.",
                   "examples": [
                     {
                       "kind": "AggregateExpression",
@@ -3255,7 +3433,10 @@
                                           "title": "ObjectAggregateOperand",
                                           "description": "Definition of an aggregate over an object-typed operand",
                                           "type": "object",
-                                          "required": ["aggregatableFields", "aggregatedType"],
+                                          "required": [
+                                            "aggregatableFields",
+                                            "aggregatedType"
+                                          ],
                                           "properties": {
                                             "aggregatedType": {
                                               "description": "The name of the object type the aggregate expression is aggregating",
@@ -3273,7 +3454,10 @@
                                                 "title": "AggregatableFieldDefinition",
                                                 "description": "Definition of an aggregatable field on an object type",
                                                 "type": "object",
-                                                "required": ["aggregateExpression", "fieldName"],
+                                                "required": [
+                                                  "aggregateExpression",
+                                                  "fieldName"
+                                                ],
                                                 "properties": {
                                                   "fieldName": {
                                                     "description": "The name of the field on the operand aggregated type that is aggregatable",
@@ -3338,7 +3522,10 @@
                                                 "title": "AggregationFunctionDefinition",
                                                 "description": "Definition of an aggregation function",
                                                 "type": "object",
-                                                "required": ["name", "returnType"],
+                                                "required": [
+                                                  "name",
+                                                  "returnType"
+                                                ],
                                                 "properties": {
                                                   "name": {
                                                     "description": "The name of the aggregation function",
@@ -3371,7 +3558,11 @@
                                                 "title": "DataConnectorAggregationFunctionMapping",
                                                 "description": "Definition of how to map an aggregate expression's aggregation functions to data connector aggregation functions.",
                                                 "type": "object",
-                                                "required": ["dataConnectorName", "dataConnectorScalarType", "functionMapping"],
+                                                "required": [
+                                                  "dataConnectorName",
+                                                  "dataConnectorScalarType",
+                                                  "functionMapping"
+                                                ],
                                                 "properties": {
                                                   "dataConnectorName": {
                                                     "description": "The data connector being mapped to",
@@ -3673,7 +3864,10 @@
                                     }
                                   ],
                                   "type": "object",
-                                  "required": ["collection", "dataConnectorName"],
+                                  "required": [
+                                    "collection",
+                                    "dataConnectorName"
+                                  ],
                                   "properties": {
                                     "dataConnectorName": {
                                       "description": "The name of the data connector backing this model.",
@@ -3704,10 +3898,7 @@
                                           "description": "Mapping of a comand or model argument name to the corresponding argument name used in the data connector. The key of this object is the argument name used in the command or model and the value is the argument name used in the data connector.",
                                           "type": "object",
                                           "additionalProperties": {
-                                            "$id": "https://hasura.io/jsonschemas/metadata/DataConnectorArgumentName",
-                                            "title": "DataConnectorArgumentName",
-                                            "description": "The name of an argument as defined by a data connector.",
-                                            "type": "string"
+                                            "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/0/oneOf/0/properties/definition/properties/argumentPresets/items/properties/argument"
                                           }
                                         }
                                       ]
@@ -3737,6 +3928,7 @@
                               "items": {
                                 "$id": "https://hasura.io/jsonschemas/metadata/OrderableField",
                                 "title": "OrderableField",
+                                "description": "A field that can be used to order the objects in a model.",
                                 "type": "object",
                                 "required": ["fieldName", "orderByDirections"],
                                 "properties": {
@@ -3746,6 +3938,7 @@
                                   "orderByDirections": {
                                     "$id": "https://hasura.io/jsonschemas/metadata/EnableAllOrSpecific_for_OrderByDirection",
                                     "title": "EnableAllOrSpecific",
+                                    "description": "Enable all or specific values.",
                                     "oneOf": [
                                       {
                                         "type": "object",
@@ -3828,7 +4021,10 @@
                                         "title": "SelectUniqueGraphQlDefinition",
                                         "description": "The definition of the GraphQL API for selecting a unique row/object from a model.",
                                         "type": "object",
-                                        "required": ["queryRootField", "uniqueIdentifier"],
+                                        "required": [
+                                          "queryRootField",
+                                          "uniqueIdentifier"
+                                        ],
                                         "properties": {
                                           "queryRootField": {
                                             "description": "The name of the query root field for this API.",
@@ -3933,6 +4129,7 @@
                                         {
                                           "$id": "https://hasura.io/jsonschemas/metadata/ModelApolloFederationConfiguration",
                                           "title": "ModelApolloFederationConfiguration",
+                                          "description": "Apollo Federation configuration for a model.",
                                           "type": "object",
                                           "required": ["entitySource"],
                                           "properties": {
@@ -3965,6 +4162,7 @@
                                         {
                                           "$id": "https://hasura.io/jsonschemas/metadata/ModelAggregateGraphQlDefinition",
                                           "title": "ModelAggregateGraphQlDefinition",
+                                          "description": "The definition of the GraphQL API for aggregating over a model.",
                                           "type": "object",
                                           "required": ["queryRootField"],
                                           "properties": {
@@ -4114,7 +4312,10 @@
                                     }
                                   ],
                                   "type": "object",
-                                  "required": ["dataConnectorCommand", "dataConnectorName"],
+                                  "required": [
+                                    "dataConnectorCommand",
+                                    "dataConnectorName"
+                                  ],
                                   "properties": {
                                     "dataConnectorName": {
                                       "description": "The name of the data connector backing this command.",
@@ -4133,6 +4334,7 @@
                                           "oneOf": [
                                             {
                                               "title": "Function",
+                                              "description": "A function as data connector command.",
                                               "type": "object",
                                               "required": ["function"],
                                               "properties": {
@@ -4147,6 +4349,7 @@
                                             },
                                             {
                                               "title": "Procedure",
+                                              "description": "A procedure as data connector command.",
                                               "type": "object",
                                               "required": ["procedure"],
                                               "properties": {
@@ -4194,7 +4397,10 @@
                                     }
                                   ],
                                   "type": "object",
-                                  "required": ["rootFieldKind", "rootFieldName"],
+                                  "required": [
+                                    "rootFieldKind",
+                                    "rootFieldName"
+                                  ],
                                   "properties": {
                                     "rootFieldName": {
                                       "description": "The name of the graphql root field to use for this command.",
@@ -4307,7 +4513,12 @@
                           "title": "RelationshipV1",
                           "description": "Definition of a relationship on an OpenDD type which allows it to be extended with related models or commands.",
                           "type": "object",
-                          "required": ["mapping", "name", "sourceType", "target"],
+                          "required": [
+                            "mapping",
+                            "name",
+                            "sourceType",
+                            "target"
+                          ],
                           "properties": {
                             "name": {
                               "description": "The name of the relationship.",
@@ -4355,7 +4566,10 @@
                                           "title": "ModelRelationshipTarget",
                                           "description": "The target model for a relationship.",
                                           "type": "object",
-                                          "required": ["name", "relationshipType"],
+                                          "required": [
+                                            "name",
+                                            "relationshipType"
+                                          ],
                                           "properties": {
                                             "name": {
                                               "description": "The name of the data model.",
@@ -4367,7 +4581,8 @@
                                             },
                                             "subgraph": {
                                               "description": "The subgraph of the target model. Defaults to the current subgraph.",
-                                              "type": ["string", "null"]
+                                              "type": ["string", "null"],
+                                              "pattern": "^(?!__)[_a-zA-Z][_a-zA-Z0-9]*$"
                                             },
                                             "relationshipType": {
                                               "description": "Type of the relationship - object or array.",
@@ -4399,7 +4614,9 @@
                                                   "title": "ModelRelationshipTargetAggregate",
                                                   "description": "Which aggregate expression to use to aggregate the array relationship.",
                                                   "type": "object",
-                                                  "required": ["aggregateExpression"],
+                                                  "required": [
+                                                    "aggregateExpression"
+                                                  ],
                                                   "properties": {
                                                     "aggregateExpression": {
                                                       "description": "The name of the aggregate expression that defines how to aggregate across the relationship.",
@@ -4448,7 +4665,8 @@
                                             },
                                             "subgraph": {
                                               "description": "The subgraph of the target command. Defaults to the current subgraph.",
-                                              "type": ["string", "null"]
+                                              "type": ["string", "null"],
+                                              "pattern": "^(?!__)[_a-zA-Z][_a-zA-Z0-9]*$"
                                             }
                                           },
                                           "additionalProperties": false
@@ -4518,7 +4736,9 @@
                                                   {
                                                     "title": "SessionVariable",
                                                     "type": "object",
-                                                    "required": ["sessionVariable"],
+                                                    "required": [
+                                                      "sessionVariable"
+                                                    ],
                                                     "properties": {
                                                       "sessionVariable": {
                                                         "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/13/oneOf/0/properties/definition/properties/permissions/items/properties/argumentPresets/items/properties/value/allOf/0/oneOf/1/properties/sessionVariable"
@@ -4541,6 +4761,7 @@
                                                 "items": {
                                                   "$id": "https://hasura.io/jsonschemas/metadata/FieldAccess",
                                                   "title": "RelationshipSourceFieldAccess",
+                                                  "description": "A field access in a relationship mapping.",
                                                   "type": "object",
                                                   "required": ["fieldName"],
                                                   "properties": {
@@ -4574,6 +4795,7 @@
                                               "argument": {
                                                 "$id": "https://hasura.io/jsonschemas/metadata/ArgumentMappingTarget",
                                                 "title": "ArgumentMappingTarget",
+                                                "description": "An argument target for a relationship mapping.",
                                                 "type": "object",
                                                 "required": ["argumentName"],
                                                 "properties": {
@@ -4683,7 +4905,11 @@
                           {
                             "role": "admin",
                             "output": {
-                              "allowedFields": ["article_id", "author_id", "title"]
+                              "allowedFields": [
+                                "article_id",
+                                "author_id",
+                                "title"
+                              ]
                             }
                           },
                           {
@@ -4735,7 +4961,10 @@
                                   {
                                     "role": "user",
                                     "output": {
-                                      "allowedFields": ["article_id", "author_id"]
+                                      "allowedFields": [
+                                        "article_id",
+                                        "author_id"
+                                      ]
                                     },
                                     "input": {
                                       "fieldPresets": [
@@ -4988,14 +5217,20 @@
                                                       {
                                                         "description": "Filters objects based on a field value.",
                                                         "type": "object",
-                                                        "required": ["fieldComparison"],
+                                                        "required": [
+                                                          "fieldComparison"
+                                                        ],
                                                         "properties": {
                                                           "fieldComparison": {
                                                             "$id": "https://hasura.io/jsonschemas/metadata/FieldComparisonPredicate",
                                                             "title": "FieldComparisonPredicate",
                                                             "description": "Field comparison predicate filters objects based on a field value.",
                                                             "type": "object",
-                                                            "required": ["field", "operator", "value"],
+                                                            "required": [
+                                                              "field",
+                                                              "operator",
+                                                              "value"
+                                                            ],
                                                             "properties": {
                                                               "field": {
                                                                 "description": "The field name of the object type of the model to compare.",
@@ -5029,14 +5264,18 @@
                                                       },
                                                       {
                                                         "type": "object",
-                                                        "required": ["fieldIsNull"],
+                                                        "required": [
+                                                          "fieldIsNull"
+                                                        ],
                                                         "properties": {
                                                           "fieldIsNull": {
                                                             "$id": "https://hasura.io/jsonschemas/metadata/FieldIsNullPredicate",
                                                             "title": "FieldIsNullPredicate",
                                                             "description": "Predicate to check if the given field is null.",
                                                             "type": "object",
-                                                            "required": ["field"],
+                                                            "required": [
+                                                              "field"
+                                                            ],
                                                             "properties": {
                                                               "field": {
                                                                 "description": "The name of the field that should be checked for a null value.",
@@ -5055,14 +5294,18 @@
                                                       {
                                                         "description": "Filters objects based on the relationship of a model.",
                                                         "type": "object",
-                                                        "required": ["relationship"],
+                                                        "required": [
+                                                          "relationship"
+                                                        ],
                                                         "properties": {
                                                           "relationship": {
                                                             "$id": "https://hasura.io/jsonschemas/metadata/RelationshipPredicate",
                                                             "title": "RelationshipPredicate",
                                                             "description": "Relationship predicate filters objects of a source model based on a predicate on the related model.",
                                                             "type": "object",
-                                                            "required": ["name"],
+                                                            "required": [
+                                                              "name"
+                                                            ],
                                                             "properties": {
                                                               "name": {
                                                                 "description": "The name of the relationship of the object type of the model to follow.",
@@ -5291,7 +5534,9 @@
                                                 {
                                                   "title": "SessionVariable",
                                                   "type": "object",
-                                                  "required": ["sessionVariable"],
+                                                  "required": [
+                                                    "sessionVariable"
+                                                  ],
                                                   "properties": {
                                                     "sessionVariable": {
                                                       "description": "Used to represent the name of a session variable, like \"x-hasura-role\".",
@@ -5303,7 +5548,9 @@
                                                 {
                                                   "title": "BooleanExpression",
                                                   "type": "object",
-                                                  "required": ["booleanExpression"],
+                                                  "required": [
+                                                    "booleanExpression"
+                                                  ],
                                                   "properties": {
                                                     "booleanExpression": {
                                                       "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/12/oneOf/0/properties/definition/properties/permissions/items/properties/select/anyOf/0/properties/filter/allOf/0/anyOf/1"
@@ -5325,6 +5572,230 @@
                             }
                           },
                           "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                {
+                  "$id": "https://hasura.io/jsonschemas/metadata/LifecyclePluginHook",
+                  "title": "LifecyclePluginHook",
+                  "description": "Definition of a lifecycle plugin hook.",
+                  "examples": [
+                    {
+                      "kind": "LifecyclePluginHook",
+                      "version": "v1",
+                      "definition": {
+                        "pre": "parse",
+                        "name": "test",
+                        "url": {
+                          "value": "http://localhost:8080"
+                        },
+                        "config": {
+                          "request": {
+                            "headers": {
+                              "additional": {
+                                "hasura-m-auth": {
+                                  "value": "zZkhKqFjqXR4g5MZCsJUZCnhCcoPyZ"
+                                }
+                              }
+                            },
+                            "session": {},
+                            "rawRequest": {
+                              "query": {},
+                              "variables": {}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "required": ["definition", "kind", "version"],
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "enum": ["LifecyclePluginHook"]
+                        },
+                        "version": {
+                          "type": "string",
+                          "enum": ["v1"]
+                        },
+                        "definition": {
+                          "$id": "https://hasura.io/jsonschemas/metadata/LifecyclePluginHookV1",
+                          "title": "LifecyclePluginHookV1",
+                          "description": "Definition of a lifecycle plugin hook - version 1.",
+                          "oneOf": [
+                            {
+                              "title": "LifecyclePluginHookPreParse",
+                              "description": "Definition of a lifecycle plugin hook for the pre-parse stage.",
+                              "type": "object",
+                              "required": ["config", "name", "pre", "url"],
+                              "properties": {
+                                "pre": {
+                                  "type": "string",
+                                  "enum": ["parse"]
+                                },
+                                "name": {
+                                  "description": "The name of the lifecycle plugin hook.",
+                                  "type": "string"
+                                },
+                                "url": {
+                                  "description": "The URL to access the lifecycle plugin hook.",
+                                  "allOf": [
+                                    {
+                                      "$id": "https://hasura.io/jsonschemas/EnvironmentValue",
+                                      "title": "EnvironmentValue",
+                                      "description": "Either a literal string or a reference to a Hasura secret",
+                                      "oneOf": [
+                                        {
+                                          "type": "object",
+                                          "required": ["value"],
+                                          "properties": {
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        },
+                                        {
+                                          "type": "object",
+                                          "required": ["valueFromEnv"],
+                                          "properties": {
+                                            "valueFromEnv": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "config": {
+                                  "description": "Configuration for the lifecycle plugin hook.",
+                                  "allOf": [
+                                    {
+                                      "$id": "https://hasura.io/jsonschemas/metadata/LifecyclePluginHookConfig",
+                                      "title": "LifecyclePluginHookConfig",
+                                      "description": "Configuration for a lifecycle plugin hook.",
+                                      "type": "object",
+                                      "required": ["request"],
+                                      "properties": {
+                                        "request": {
+                                          "description": "Configuration for the request to the lifecycle plugin hook.",
+                                          "allOf": [
+                                            {
+                                              "$id": "https://hasura.io/jsonschemas/metadata/LifecyclePluginHookConfigRequest",
+                                              "title": "LifecyclePluginHookConfigRequest",
+                                              "description": "Configuration for a lifecycle plugin hook request.",
+                                              "type": "object",
+                                              "required": ["rawRequest"],
+                                              "properties": {
+                                                "headers": {
+                                                  "description": "Configuration for the headers.",
+                                                  "anyOf": [
+                                                    {
+                                                      "$id": "https://hasura.io/jsonschemas/metadata/LifecyclePluginHookHeadersConfig",
+                                                      "title": "LifecyclePluginHookHeadersConfig",
+                                                      "description": "Configuration for a lifecycle plugin hook headers.",
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "additional": {
+                                                          "description": "Additional headers to be sent with the request.",
+                                                          "anyOf": [
+                                                            {
+                                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/0/oneOf/0/properties/definition/properties/headers/allOf/0"
+                                                            },
+                                                            {
+                                                              "type": "null"
+                                                            }
+                                                          ]
+                                                        },
+                                                        "forward": {
+                                                          "description": "Headers to be forwarded from the incoming request.",
+                                                          "default": [],
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      },
+                                                      "additionalProperties": false
+                                                    },
+                                                    {
+                                                      "type": "null"
+                                                    }
+                                                  ]
+                                                },
+                                                "session": {
+                                                  "description": "Configuration for the session (includes roles and session variables).",
+                                                  "anyOf": [
+                                                    {
+                                                      "$id": "https://hasura.io/jsonschemas/metadata/LeafConfig",
+                                                      "title": "LeafConfig",
+                                                      "description": "Leaf Configuration.",
+                                                      "type": "object",
+                                                      "additionalProperties": false
+                                                    },
+                                                    {
+                                                      "type": "null"
+                                                    }
+                                                  ]
+                                                },
+                                                "rawRequest": {
+                                                  "description": "Configuration for the raw request.",
+                                                  "allOf": [
+                                                    {
+                                                      "$id": "https://hasura.io/jsonschemas/metadata/RawRequestConfig",
+                                                      "title": "RawRequestConfig",
+                                                      "description": "Configuration for the raw request.",
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "query": {
+                                                          "description": "Configuration for the query.",
+                                                          "anyOf": [
+                                                            {
+                                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/14/oneOf/0/properties/definition/oneOf/0/properties/config/allOf/0/properties/request/allOf/0/properties/session/anyOf/0"
+                                                            },
+                                                            {
+                                                              "type": "null"
+                                                            }
+                                                          ]
+                                                        },
+                                                        "variables": {
+                                                          "description": "Configuration for the variables.",
+                                                          "anyOf": [
+                                                            {
+                                                              "$ref": "#/definitions/SubgraphObject/anyOf/0/anyOf/1/oneOf/14/oneOf/0/properties/definition/oneOf/0/properties/config/allOf/0/properties/request/allOf/0/properties/session/anyOf/0"
+                                                            },
+                                                            {
+                                                              "type": "null"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      "additionalProperties": false
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "additionalProperties": false
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "additionalProperties": false
+                                    }
+                                  ]
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          ]
                         }
                       },
                       "additionalProperties": false
