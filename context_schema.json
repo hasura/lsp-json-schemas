@@ -115,6 +115,10 @@
           "$ref": "#/definitions/Scripts",
           "description": "Configured scripts."
         },
+        "promptQL": {
+          "type": "boolean",
+          "description": "Whether PromptQL is enabled."
+        },
         "current": {
           "type": "string",
           "description": "Current Active Context."
