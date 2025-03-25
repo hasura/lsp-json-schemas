@@ -81,6 +81,10 @@
         "selfHostedDataPlane": {
           "type": "boolean",
           "description": "Whether the project is in a self-hosted data plane"
+        },
+        "noBuildConnectors": {
+          "type": "boolean",
+          "description": "Avoid building connectors during supergraph build."
         }
       },
       "additionalProperties": false,
